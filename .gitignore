@@ -1,0 +1,3 @@
+venv/*
+*.gguf
+.DS_Store
