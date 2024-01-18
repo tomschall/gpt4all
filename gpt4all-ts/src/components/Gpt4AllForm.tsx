@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { createQuestion } from '../services/createQuestion';
 
@@ -15,8 +15,14 @@ const Gpt4all: React.FC = () => {
     },
   );
 
-  const handleSubmit = () => {
+  console.log('formValue', formValue);
+
+  const handleSubmit = (
+    e: React.ChangeEvent<HTMLTextAreaElement> | MouseEvent<HTMLButtonElement>,
+  ) => {
+    e.preventDefault();
     setQuestion(formValue);
+    setFormValue('');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,6 +34,7 @@ const Gpt4all: React.FC = () => {
       if (e.key === 'Enter') {
         e.preventDefault();
         setQuestion(formValue);
+        setFormValue('');
       }
     };
 
@@ -43,7 +50,7 @@ const Gpt4all: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
           <label htmlFor="question">What is your question?</label>
           <br />
@@ -61,17 +68,18 @@ const Gpt4all: React.FC = () => {
           <br />
         </div>
         <br />
-        <button type="submit">Submit</button>
+        <button onClick={(e) => handleSubmit(e)}>Submit</button>
         <br />
         <br />
       </form>
-      {data &&
-        data.choices &&
-        data.choices.map(
-          (choice: { message: { content: string } }, index: number) => (
-            <span key={index}>{choice.message.content}</span>
-          ),
-        )}
+      {data
+        ? data.choices &&
+          data.choices.map(
+            (choice: { message: { content: string } }, index: number) => (
+              <span key={index}>{choice.message.content}</span>
+            ),
+          )
+        : 'No question? No answer!'}
     </div>
   );
 };

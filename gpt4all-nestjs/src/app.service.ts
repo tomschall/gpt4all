@@ -29,6 +29,8 @@ export class AppService {
   }
 
   async createQuestion(question: string): Promise<any> {
+    if (!question) return false;
+
     const model = await loadModel('nous-hermes-llama2-13b.Q4_0.gguf', {
       modelPath:
         '/Users/thomas.schallert@fhnw.ch/Projects/gpt4all/gpt4all-nestjs/',
