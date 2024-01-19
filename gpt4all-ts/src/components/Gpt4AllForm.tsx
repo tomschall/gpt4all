@@ -44,7 +44,12 @@ const Gpt4all: React.FC = () => {
   }, [setQuestion, formValue]);
 
   if (error) return <div className="failed">failed to load</div>;
-  if (isValidating) return <div className="Loading">Loading...</div>;
+  if (isValidating)
+    return (
+      <div className="loading">
+        <img src="/public/spinner.gif" width="50"></img>
+      </div>
+    );
 
   return (
     <div>
