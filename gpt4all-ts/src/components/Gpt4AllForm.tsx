@@ -47,7 +47,10 @@ const Gpt4all: React.FC = () => {
   if (isValidating)
     return (
       <div className="loading">
-        <img src="/public/spinner.gif" width="50"></img>
+        <p>
+          <img src="/public/spinner.gif" width="50"></img>
+        </p>
+        <p>Wait a moment, fetching an answer...</p>
       </div>
     );
 
