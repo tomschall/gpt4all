@@ -15,8 +15,6 @@ const Gpt4all: React.FC = () => {
     },
   );
 
-  console.log('formValue', formValue);
-
   const handleSubmit = (
     e: React.ChangeEvent<HTMLTextAreaElement> | MouseEvent<HTMLButtonElement>,
   ) => {
